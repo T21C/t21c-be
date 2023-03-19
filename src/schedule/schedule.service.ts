@@ -10,7 +10,7 @@ export class ScheduleService {
     private readonly levelsService: LevelsService,
   ) {}
 
-  @Cron('* 10 * * *')
+  @Cron('* /10 * * *')
   async refreshDb() {
     const result = await this.gsheetsService.getDataFromSheets();
     try {
