@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { Cron } from '@nestjs/schedule';
+import { Injectable, Logger } from '@nestjs/common';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { LevelsService } from '../levels/levels.service';
 import { GsheetsService } from 'src/gsheets/gsheets.service';
 
@@ -9,15 +9,15 @@ export class ScheduleService {
     private readonly gsheetsService: GsheetsService,
     private readonly levelsService: LevelsService,
   ) {}
+  private readonly logger = new Logger(ScheduleService.name);
 
-  @Cron('* /10 * * *')
+  @Cron(CronExpression.EVERY_10_MINUTES)
   async refreshDb() {
+    this.logger.log('wow refreshing');
     const result = await this.gsheetsService.getDataFromSheets();
     try {
       await this.levelsService.deleteLevels();
       await this.levelsService.insertLevels(result);
-
-      return 'Refresh done';
     } catch (e) {
       return e;
     }
