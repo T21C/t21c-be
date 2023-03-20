@@ -18,7 +18,7 @@ export class Level {
   creator: string;
 
   @Prop()
-  diff: string;
+  diff: number;
 
   @Prop()
   diffstrength: string;
@@ -27,7 +27,7 @@ export class Level {
   feeling: number;
 
   @Prop()
-  forum: string;
+  forum: number;
 
   @Prop()
   vidLink: string;

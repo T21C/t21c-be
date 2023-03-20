@@ -17,7 +17,8 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Level } from 'schemas/level.schema';
-import { LevelDto } from 'schemas/level.dto';
+import { LevelDto } from 'dto/level.dto';
+import { LevelQueryDto } from 'dto/levelquery.dto';
 import { AppService } from '../app.service';
 import { GsheetsService } from '../gsheets/gsheets.service';
 import { LevelsService } from '../levels/levels.service';
@@ -76,9 +77,9 @@ export class LevelsController {
     description: 'Success',
     type: [LevelDto],
   })
-  async search(@Query() query: any) {
-    if (query.query !== null) {
-      return this.levelsService.findByQuery(query.query);
+  async search(@Query() query: LevelQueryDto) {
+    if (Object.keys(query).length > 0) {
+      return this.levelsService.findByQuery(query);
     } else {
       return this.appService.findAll();
     }

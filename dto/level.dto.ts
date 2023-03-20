@@ -13,8 +13,8 @@ export class LevelDto {
   @ApiProperty({ example: 'Zagon' })
   creator: string;
 
-  @ApiProperty({ example: '21+' })
-  diff: string;
+  @ApiProperty({ example: 21.05 })
+  diff: number;
 
   @ApiProperty({ example: 'G ▲' })
   diffstrength: string;
@@ -22,8 +22,8 @@ export class LevelDto {
   @ApiProperty({ example: 21 })
   feeling: number;
 
-  @ApiProperty({ example: '21' })
-  forum: string;
+  @ApiProperty({ example: 21 })
+  forum: number;
 
   @ApiProperty({ example: 'https://youtu.be/tdig-B8QVKo' })
   vidLink: string;
