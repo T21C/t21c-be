@@ -1,3 +1,5 @@
+import seedrandom from 'seedrandom';
+
 export async function parseGViz(
   gvizStr: string,
   includedColumns: number[],
@@ -32,4 +34,12 @@ export async function parseGViz(
   });
 
   return data;
+}
+
+export function getRandomInt(min: number, max: number, seed?: string) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  const randomInt: number = seedrandom(seed)();
+
+  return Math.floor(randomInt * (max - min + 1) + min);
 }

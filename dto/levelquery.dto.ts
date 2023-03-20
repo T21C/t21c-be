@@ -12,4 +12,10 @@ export class LevelQueryDto {
 
   @ApiPropertyOptional({ example: 'Zagon' })
   creatorQuery: string;
+
+  @ApiPropertyOptional({ example: 10 })
+  offset: number;
+
+  @ApiPropertyOptional({ example: 50 })
+  limit: number;
 }

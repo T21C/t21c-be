@@ -81,7 +81,7 @@ export class LevelsController {
     if (Object.keys(query).length > 0) {
       return this.levelsService.findByQuery(query);
     } else {
-      return this.appService.findAll();
+      return this.levelsService.findAll();
     }
   }
 

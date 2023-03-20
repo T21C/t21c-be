@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { parseGViz } from 'src/parseGViz';
+import { parseGViz } from 'src/utils';
 import axios from 'axios';
 
 @Injectable()

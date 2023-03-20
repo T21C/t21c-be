@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { LevelQueryDto } from 'dto/levelquery.dto';
+import { LevelResponseDto } from 'dto/levelresponse.dto';
 import { Model } from 'mongoose';
 import { Level, LevelDocument } from 'schemas/level.schema';
 
@@ -16,37 +17,62 @@ export class LevelsService {
     await this.levelModel.deleteMany({});
   }
 
-  async findAll(): Promise<Level[]> {
-    return this.levelModel.find().exec();
+  async findAll(): Promise<LevelResponseDto> {
+    const levelList = this.levelModel.find();
+
+    const results = await levelList.exec();
+    const count = await this.levelModel.countDocuments(levelList.getQuery());
+
+    const returnObject = {
+      count,
+      results,
+    };
+    return returnObject;
   }
 
-  async findByQuery(query: LevelQueryDto): Promise<Level[]> {
+  async findByQuery(query: LevelQueryDto): Promise<LevelResponseDto> {
     const levelList = this.levelModel.find();
 
     if (query.query) {
       const queryRegex = new RegExp(query.query, 'i');
-      levelList.find({
-        $or: [
-          { song: queryRegex },
-          { artist: queryRegex },
-          { creator: queryRegex },
-        ],
-      });
+      levelList.and([
+        {
+          $or: [
+            { song: queryRegex },
+            { artist: queryRegex },
+            { creator: queryRegex },
+          ],
+        },
+      ]);
     }
     if (query.artistQuery) {
       const queryRegex = new RegExp(query.artistQuery, 'i');
-      levelList.find({ artist: queryRegex });
+      levelList.and([{ artist: queryRegex }]);
     }
     if (query.songQuery) {
       const queryRegex = new RegExp(query.songQuery, 'i');
-      levelList.find({ song: queryRegex });
+      levelList.and([{ song: queryRegex }]);
     }
     if (query.creatorQuery) {
       const queryRegex = new RegExp(query.creatorQuery, 'i');
-      levelList.find({ creator: queryRegex });
+      levelList.and([{ creator: queryRegex }]);
     }
 
-    return levelList.exec();
+    if (query.offset) {
+      levelList.skip(query.offset);
+    }
+    if (query.limit) {
+      levelList.limit(query.limit);
+    }
+
+    const results = await levelList.exec();
+    const count = await this.levelModel.countDocuments(levelList.getQuery());
+
+    const returnObject = {
+      results,
+      count,
+    };
+    return returnObject;
   }
 
   async findById(id: number): Promise<Level | null> {
