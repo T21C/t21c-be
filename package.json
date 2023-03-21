@@ -30,7 +30,7 @@
     "mongoose": "^7.0.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
-    "seedrandom": "^3.0.5"
+    "shuffle-seed": "^1.1.6"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.3.0",
@@ -40,6 +40,7 @@
     "@types/jest": "29.5.0",
     "@types/node": "18.15.3",
     "@types/seedrandom": "^3.0.5",
+    "@types/shuffle-seed": "^1.1.0",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",

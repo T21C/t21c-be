@@ -18,4 +18,10 @@ export class LevelQueryDto {
 
   @ApiPropertyOptional({ example: 50 })
   limit: number;
+
+  @ApiPropertyOptional({ example: false })
+  random: boolean;
+
+  @ApiPropertyOptional({ example: 1234 })
+  seed: number;
 }

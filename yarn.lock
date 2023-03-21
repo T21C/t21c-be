@@ -1048,6 +1048,11 @@
     "@types/mime" "*"
     "@types/node" "*"
 
+"@types/shuffle-seed@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@types/shuffle-seed/-/shuffle-seed-1.1.0.tgz#b301d4b1dc88f603b8187329bee9cdb9e814f12d"
+  integrity sha512-h6UW72XuE07bSDVTkNjMMapFj6ERJmvf+RajssOoEIVhuU53/+zyCSBjBrSpDJSzVYjGr4CYxW3ABrY0C6s8qA==
+
 "@types/stack-utils@^2.0.0":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-2.0.1.tgz#20f18294f797f2209b5f65c8e3b5c8e8261d127c"
@@ -4239,10 +4244,10 @@ schema-utils@^3.1.0, schema-utils@^3.1.1:
     ajv "^6.12.5"
     ajv-keywords "^3.5.2"
 
-seedrandom@^3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/seedrandom/-/seedrandom-3.0.5.tgz#54edc85c95222525b0c7a6f6b3543d8e0b3aa0a7"
-  integrity sha512-8OwmbklUNzwezjGInmZ+2clQmExQPvomqjL7LFqOYqtmuxRgQYqOD3mHaU+MvZn5FLUeVxVfQjwLZW/n/JFuqg==
+seedrandom@^2.4.2:
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/seedrandom/-/seedrandom-2.4.4.tgz#b25ea98632c73e45f58b77cfaa931678df01f9ba"
+  integrity sha512-9A+PDmgm+2du77B5i0Ip2cxOqqHjgNxnBgglxLcX78A2D6c2rTo61z4jnVABpF4cKeDMDG+cmXXvdnqse2VqMA==
 
 semver@7.x, semver@^7.3.4, semver@^7.3.5, semver@^7.3.7, semver@^7.3.8:
   version "7.3.8"
@@ -4317,6 +4322,13 @@ shelljs@0.8.5:
     glob "^7.0.0"
     interpret "^1.0.0"
     rechoir "^0.6.2"
+
+shuffle-seed@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/shuffle-seed/-/shuffle-seed-1.1.6.tgz#533c12683bab3b4fa3e8751fc4e562146744260b"
+  integrity sha512-Vr9wlwMKJVUeFNGyc4aNbrzkI568gkve7ykyJ+1/cz78j3yRlJODWU0CuJ/fmk3MCjvAClpnqlycd/Y53UG3UA==
+  dependencies:
+    seedrandom "^2.4.2"
 
 side-channel@^1.0.4:
   version "1.0.4"

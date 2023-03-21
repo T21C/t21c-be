@@ -3,7 +3,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { LevelQueryDto } from 'dto/levelquery.dto';
 import { LevelResponseDto } from 'dto/levelresponse.dto';
 import { Model } from 'mongoose';
+import { getRandomInt } from '../utils';
 import { Level, LevelDocument } from 'schemas/level.schema';
+import { shuffle } from 'shuffle-seed';
 
 @Injectable()
 export class LevelsService {
@@ -58,21 +60,44 @@ export class LevelsService {
       levelList.and([{ creator: queryRegex }]);
     }
 
-    if (query.offset) {
-      levelList.skip(query.offset);
-    }
-    if (query.limit) {
-      levelList.limit(query.limit);
-    }
+    if (query.random) {
+      const seed =
+        query.seed ||
+        getRandomInt(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+      levelList.sort('id');
+      const normalList = await levelList.exec();
+      let shuffledList = shuffle(normalList, seed);
 
-    const results = await levelList.exec();
-    const count = await this.levelModel.countDocuments(levelList.getQuery());
+      if (query.offset) {
+        shuffledList = shuffledList.slice(query.offset);
+      }
+      if (query.limit) {
+        shuffledList = shuffledList.slice(0, query.offset + query.limit);
+      }
 
-    const returnObject = {
-      results,
-      count,
-    };
-    return returnObject;
+      const count = await this.levelModel.countDocuments(levelList.getQuery());
+      const returnObject = {
+        results: shuffledList,
+        count,
+      };
+      return returnObject;
+    } else {
+      if (query.offset) {
+        levelList.skip(query.offset);
+      }
+      if (query.limit) {
+        levelList.limit(query.limit);
+      }
+
+      const results = await levelList.exec();
+      const count = await this.levelModel.countDocuments(levelList.getQuery());
+
+      const returnObject = {
+        results,
+        count,
+      };
+      return returnObject;
+    }
   }
 
   async findById(id: number): Promise<Level | null> {
