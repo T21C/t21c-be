@@ -60,7 +60,23 @@ export class LevelsService {
       levelList.and([{ creator: queryRegex }]);
     }
 
-    if (query.random) {
+    let random = false;
+
+    if (query.sort) {
+      if (query.sort === 'RECENT_DESC') {
+        levelList.sort({ id: 'desc' });
+      }
+      if (query.sort === 'RECENT_ASC') {
+        levelList.sort({ id: 'asc' });
+      }
+      if (query.sort === 'RANDOM') {
+        random = true;
+      }
+    } else {
+      levelList.sort({ id: 'desc' });
+    }
+
+    if (random) {
       const seed =
         query.seed ||
         getRandomInt(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
