@@ -68,11 +68,11 @@ export class LevelsService {
       const normalList = await levelList.exec();
       let shuffledList = shuffle(normalList, seed);
 
-      if (query.offset) {
+      if ('offset' in query) {
         shuffledList = shuffledList.slice(query.offset);
       }
-      if (query.limit) {
-        shuffledList = shuffledList.slice(0, query.offset + query.limit);
+      if ('limit' in query) {
+        shuffledList = shuffledList.slice(0, query.limit);
       }
 
       const count = await this.levelModel.countDocuments(levelList.getQuery());
@@ -82,10 +82,10 @@ export class LevelsService {
       };
       return returnObject;
     } else {
-      if (query.offset) {
+      if ('offset' in query) {
         levelList.skip(query.offset);
       }
-      if (query.limit) {
+      if ('limit' in query) {
         levelList.limit(query.limit);
       }
 
