@@ -22,7 +22,9 @@ export class LevelQueryDto {
   @ApiPropertyOptional({ example: false })
   random: boolean;
 
-  @ApiPropertyOptional({ enum: ['RECENT_ASC', 'RECENT_DESC', 'RANDOM'] })
+  @ApiPropertyOptional({
+    enum: ['RECENT_ASC', 'RECENT_DESC', 'DIFF_ASC', 'DIFF_DESC', 'RANDOM'],
+  })
   sort: string;
 
   @ApiPropertyOptional({ example: 1234 })
