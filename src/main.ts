@@ -3,7 +3,10 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
+  });
 
   const config = new DocumentBuilder()
     .setTitle('T21+C API')
