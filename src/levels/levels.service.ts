@@ -6,6 +6,7 @@ import { Model } from 'mongoose';
 import { getRandomInt } from '../utils';
 import { Level, LevelDocument } from 'schemas/level.schema';
 import { shuffle } from 'shuffle-seed';
+import { UiPackSongDto } from 'dto/uipacksong.dto';
 
 @Injectable()
 export class LevelsService {
@@ -124,5 +125,40 @@ export class LevelsService {
 
   async findById(id: number): Promise<Level | null> {
     return this.levelModel.findOne({ id: id }).exec();
+  }
+
+  async findAllPackUI(): Promise<UiPackSongDto[]> {
+    const levelList = this.levelModel.find();
+    const results = await levelList.exec();
+    const resultObject = results.map((result) => result.toObject());
+    console.log(results);
+
+    const newResults = resultObject.map((level) => {
+      const packUiLevel: UiPackSongDto = {
+        title: '',
+        author: '',
+        artist: '',
+        download: '',
+      };
+      Object.entries(level).forEach(([key, value]) => {
+        switch (key) {
+          case 'song':
+            packUiLevel.title = value;
+            break;
+          case 'creator':
+            packUiLevel.author = value;
+            break;
+          case 'artist':
+            packUiLevel.artist = value;
+            break;
+          case 'dlLink':
+            packUiLevel.download = value;
+            break;
+        }
+      });
+      return packUiLevel;
+    });
+
+    return newResults;
   }
 }

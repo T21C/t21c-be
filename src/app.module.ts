@@ -10,6 +10,7 @@ import { LevelsService } from './levels/levels.service';
 import { ScheduleService } from './schedule/schedule.service';
 
 import { MONGODB_URL } from '../config.json';
+import { PackUiController } from './packui/packui.controller';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { MONGODB_URL } from '../config.json';
     MongooseModule.forFeature([{ name: 'Level', schema: LevelSchema }]),
     ScheduleModule.forRoot(),
   ],
-  controllers: [AppController, LevelsController],
+  controllers: [AppController, LevelsController, PackUiController],
   providers: [AppService, GsheetsService, LevelsService, ScheduleService],
 })
 export class AppModule {}
