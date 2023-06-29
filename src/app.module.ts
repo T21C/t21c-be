@@ -11,6 +11,8 @@ import { ScheduleService } from './schedule/schedule.service';
 
 import { MONGODB_URL } from '../config.json';
 import { PackUiController } from './packui/packui.controller';
+import { DictService } from './dict/dict.service';
+import { DictController } from './dict/dict.controller';
 
 @Module({
   imports: [
@@ -21,7 +23,18 @@ import { PackUiController } from './packui/packui.controller';
     MongooseModule.forFeature([{ name: 'Level', schema: LevelSchema }]),
     ScheduleModule.forRoot(),
   ],
-  controllers: [AppController, LevelsController, PackUiController],
-  providers: [AppService, GsheetsService, LevelsService, ScheduleService],
+  controllers: [
+    AppController,
+    LevelsController,
+    PackUiController,
+    DictController,
+  ],
+  providers: [
+    AppService,
+    GsheetsService,
+    LevelsService,
+    ScheduleService,
+    DictService,
+  ],
 })
 export class AppModule {}
