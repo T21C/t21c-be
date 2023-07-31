@@ -133,6 +133,7 @@ export class LevelsService {
     const resultObject = results.map((result) => result.toObject());
     console.log(results);
 
+    let dlLink = '';
     const newResults = resultObject.map((level) => {
       const packUiLevel: UiPackSongDto = {
         title: '',
@@ -142,6 +143,9 @@ export class LevelsService {
       };
       Object.entries(level).forEach(([key, value]) => {
         switch (key) {
+          case 'id': 
+            dlLink = `https://cdn.packui.net/content/t21c/${value}.zip`;
+            break;
           case 'song':
             packUiLevel.title = value;
             break;
@@ -152,7 +156,9 @@ export class LevelsService {
             packUiLevel.artist = value;
             break;
           case 'dlLink':
-            packUiLevel.download = value;
+//            packUiLevel.download = value;
+//            break;
+            packUiLevel.download = (value !== '' ? dlLink : '');
             break;
         }
       });
