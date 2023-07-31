@@ -26,7 +26,7 @@ export class PackUiController {
       await this.levelsService.findAllPackUI();
     const response: UiPackDto = {
       version: '1.0.0',
-      title: 'T21+C Pack',
+      title: 'T21C Pack',
       description: 'All levels in T21+C in one pack!',
       author: 'Various Creators (collected by the 21 Forums)',
       artist: 'Various Artists',
