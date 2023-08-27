@@ -21,9 +21,6 @@ export class Level {
   diff: number;
 
   @Prop()
-  diffstrength: string;
-
-  @Prop()
   feeling: number;
 
   @Prop()

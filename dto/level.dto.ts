@@ -16,9 +16,6 @@ export class LevelDto {
   @ApiProperty({ example: 21.05 })
   diff: number;
 
-  @ApiProperty({ example: 'G ▲' })
-  diffstrength: string;
-
   @ApiProperty({ example: 21 })
   feeling: number;
 
