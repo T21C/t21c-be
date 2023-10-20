@@ -12,7 +12,7 @@ export class GsheetsService {
 
     const result = await parseGViz(
       gvizStr,
-      [0, 1, 2, 3, 6, 9, 11, 33, 34, 35],
+      [0, 1, 2, 3, 6, 8, 10, 21, 22, 23],
       [
         'id',
         'song',
