@@ -143,7 +143,7 @@ export class LevelsService {
       };
       Object.entries(level).forEach(([key, value]) => {
         switch (key) {
-          case 'id': 
+          case 'id':
             dlLink = `https://cdn.packui.net/content/t21c/${value}.zip`;
             break;
           case 'song':
@@ -156,9 +156,9 @@ export class LevelsService {
             packUiLevel.artist = value;
             break;
           case 'dlLink':
-//            packUiLevel.download = value;
-//            break;
-            packUiLevel.download = (value !== '' ? dlLink : '');
+            //            packUiLevel.download = value;
+            //            break;
+            packUiLevel.download = value !== '' ? dlLink : '';
             break;
         }
       });

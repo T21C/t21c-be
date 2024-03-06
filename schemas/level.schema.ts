@@ -21,10 +21,7 @@ export class Level {
   diff: number;
 
   @Prop()
-  feeling: number;
-
-  @Prop()
-  forum: number;
+  pgu_diff: string;
 
   @Prop()
   vidLink: string;
