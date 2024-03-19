@@ -18,6 +18,15 @@ export class Level {
   creator: string;
 
   @Prop()
+  charter: string;
+
+  @Prop()
+  vfxer: string;
+
+  @Prop()
+  team: string;
+
+  @Prop()
   diff: number;
 
   @Prop()

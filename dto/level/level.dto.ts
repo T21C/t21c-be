@@ -13,6 +13,15 @@ export class LevelDto {
   @ApiProperty({ example: 'Zagon' })
   creator: string;
 
+  @ApiProperty({ example: 'Random Charter' })
+  charter: string;
+
+  @ApiProperty({ example: 'Yet AnotherVFXer' })
+  vfxer: string;
+
+  @ApiProperty({ example: 'Team TUF' })
+  team: string;
+
   @ApiProperty({ example: 21.05 })
   diff: number;
 
