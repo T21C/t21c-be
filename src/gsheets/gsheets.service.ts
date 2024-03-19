@@ -40,9 +40,17 @@ export class GsheetsService {
 
     const result = await parseGViz(
       gvizStr,
-      [0, 2, 4, 5, 6],
-      ['levelId', 'player', 'vidTitle', 'vidLink', 'vidUploadTime'],
-      [7, 8, 9, 10, 11, 12, 13],
+      [0, 1, 2, 3, 5, 6, 7],
+      [
+        'id',
+        'levelId',
+        'speed',
+        'player',
+        'vidTitle',
+        'vidLink',
+        'vidUploadTime',
+      ],
+      [8, 9, 10, 11, 12, 13, 14],
     );
 
     return result;

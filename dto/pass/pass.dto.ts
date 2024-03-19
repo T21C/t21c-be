@@ -1,6 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class PassDto {
+  @ApiProperty({ example: 2773 })
+  id: number;
+
   @ApiProperty({ example: 1 })
   levelId: number;
 

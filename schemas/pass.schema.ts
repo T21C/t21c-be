@@ -6,6 +6,9 @@ export type PassDocument = HydratedDocument<Pass>;
 @Schema()
 export class Pass {
   @Prop()
+  id: number;
+
+  @Prop()
   levelId: number;
 
   @Prop()
