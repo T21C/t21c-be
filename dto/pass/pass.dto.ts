@@ -18,4 +18,7 @@ export class PassDto {
 
   @ApiProperty({ example: '2021-09-28T15:00:14Z' })
   vidUploadTime: string;
+
+  @ApiProperty({ example: [6, 17, 46, 4910, 24, 15, 0] })
+  judgements: number[];
 }

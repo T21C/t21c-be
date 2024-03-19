@@ -23,6 +23,9 @@ export class Pass {
   @Prop()
   vidUploadTime: string;
 
+  @Prop()
+  judgements: number[];
+
   @Prop({ select: false })
   _id: string;
 
