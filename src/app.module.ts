@@ -11,6 +11,9 @@ import { ScheduleService } from './schedule/schedule.service';
 
 import { MONGODB_URL } from '../config.json';
 import { PackUiController } from './packui/packui.controller';
+import { PassesService } from './passes/passes.service';
+import { PassesController } from './passes/passes.controller';
+import { PassSchema } from 'schemas/pass.schema';
 
 @Module({
   imports: [
@@ -19,9 +22,21 @@ import { PackUiController } from './packui/packui.controller';
       useUnifiedtopology: true,
     }),
     MongooseModule.forFeature([{ name: 'Level', schema: LevelSchema }]),
+    MongooseModule.forFeature([{ name: 'Pass', schema: PassSchema }]),
     ScheduleModule.forRoot(),
   ],
-  controllers: [AppController, LevelsController, PackUiController],
-  providers: [AppService, GsheetsService, LevelsService, ScheduleService],
+  controllers: [
+    AppController,
+    LevelsController,
+    PassesController,
+    PackUiController,
+  ],
+  providers: [
+    AppService,
+    GsheetsService,
+    LevelsService,
+    PassesService,
+    ScheduleService,
+  ],
 })
 export class AppModule {}

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { GsheetsService } from './gsheets.service';
 
-describe('GsheetsService', () => {
+describe('GSheets Service', () => {
   let service: GsheetsService;
 
   beforeEach(async () => {
@@ -12,7 +12,7 @@ describe('GsheetsService', () => {
     service = module.get<GsheetsService>(GsheetsService);
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+  it('getLevelsDataFromSheets should return level data from sheets', async () => {
+    await expect(service.getLevelsDataFromSheets()).toBeDefined();
   });
 });

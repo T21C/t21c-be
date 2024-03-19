@@ -2,6 +2,7 @@ export async function parseGViz(
   gvizStr: string,
   includedColumns: number[],
   headerArray?: string[],
+  judgements?: number[],
 ) {
   const match = gvizStr.match(/google.visualization.Query.setResponse\((.*)\)/);
   if (!match) {
@@ -28,6 +29,9 @@ export async function parseGViz(
       const cell = row.c[index];
       rowData[headers[i]] = cell ? cell.v : '';
     });
+    if (judgements) {
+      rowData['judgements'] = judgements.map((judgement) => row.c[judgement].v);
+    }
     return rowData;
   });
 

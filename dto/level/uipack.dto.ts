@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { UiPackSongDto } from 'dto/uipacksong.dto';
+import { UiPackSongDto } from 'dto/level/uipacksong.dto';
 
 export class UiPackDto {
   @ApiPropertyOptional({ example: 'link/to/schema' })

@@ -20,9 +20,6 @@ export class LevelDto {
   pgu_diff: string;
 
   @ApiProperty({ example: 21 })
-  feeling: number;
-
-  @ApiProperty({ example: 21 })
   forum: number;
 
   @ApiProperty({ example: 'https://youtu.be/tdig-B8QVKo' })

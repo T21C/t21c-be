@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { LevelQueryDto } from 'dto/levelquery.dto';
-import { LevelResponseDto } from 'dto/levelresponse.dto';
+import { LevelQueryDto } from 'dto/level/levelquery.dto';
+import { LevelResponseDto } from 'dto/level/levelresponse.dto';
 import { Model } from 'mongoose';
 import { getRandomInt } from '../utils';
 import { Level, LevelDocument } from 'schemas/level.schema';
 import { shuffle } from 'shuffle-seed';
-import { UiPackSongDto } from 'dto/uipacksong.dto';
+import { UiPackSongDto } from 'dto/level/uipacksong.dto';
 
 @Injectable()
 export class LevelsService {

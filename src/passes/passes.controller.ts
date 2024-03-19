@@ -21,23 +21,25 @@ import { LevelDto } from 'dto/level/level.dto';
 import { LevelQueryDto } from 'dto/level/levelquery.dto';
 import { AppService } from '../app.service';
 import { GsheetsService } from '../gsheets/gsheets.service';
-import { LevelsService } from '../levels/levels.service';
+import { PassesService } from './passes.service';
 import { TOKEN } from '../../config.json';
+import { PassDto } from 'dto/pass/pass.dto';
 
 @ApiTags()
-@Controller('levels')
-export class LevelsController {
+@Controller('passes')
+export class PassesController {
   constructor(
     private readonly appService: AppService,
     private readonly gsheetsService: GsheetsService,
-    private readonly levelsService: LevelsService,
+    private readonly passesService: PassesService,
   ) {}
 
   @ApiExcludeEndpoint()
   @Post('refresh')
   @ApiOperation({
-    summary: 'Refreshes database',
-    description: 'Refreshes the database and syncs it with the main sheet.',
+    summary: 'Refreshes passes database',
+    description:
+      'Refreshes the passes database and syncs it with the main sheet.',
   })
   @ApiSecurity('apiKey')
   @ApiResponse({
@@ -53,10 +55,10 @@ export class LevelsController {
       throw new UnauthorizedException('Invalid token');
     }
 
-    const result = await this.gsheetsService.getLevelsDataFromSheets();
+    const result = await this.gsheetsService.getPassesDataFromSheets();
     try {
-      await this.levelsService.deleteLevels();
-      await this.levelsService.insertLevels(result);
+      await this.passesService.deletePasses();
+      await this.passesService.insertPasses(result);
 
       return 'Refresh done';
     } catch (e) {
@@ -66,23 +68,17 @@ export class LevelsController {
 
   @Get()
   @ApiOperation({
-    summary: 'Gets a list of levels',
-    description:
-      'Retrieves a list of all levels, and search with query if any.',
+    summary: 'Gets a list of passes',
+    description: 'Retrieves a list of all passes.',
   })
-  @ApiTags('levels')
-  @ApiQuery({ name: 'query', description: 'Query to search', required: false })
+  @ApiTags('passes')
   @ApiResponse({
     status: 200,
     description: 'Success',
-    type: [LevelDto],
+    type: [PassDto],
   })
-  async search(@Query() query: LevelQueryDto) {
-    if (Object.keys(query).length > 0) {
-      return this.levelsService.findByQuery(query);
-    } else {
-      return this.levelsService.findAll();
-    }
+  async search() {
+    return this.passesService.findAll();
   }
 
   @Get(':id')
@@ -94,22 +90,13 @@ export class LevelsController {
   @ApiResponse({
     status: 200,
     description: 'Success',
-    type: LevelDto,
+    type: PassDto,
   })
   @ApiResponse({
     status: 400,
     description: 'Invalid ID',
   })
-  @ApiResponse({
-    status: 404,
-    description: 'Level not found',
-  })
-  async getLevel(@Param('id', new ParseIntPipe()) id: number): Promise<Level> {
-    const level = await this.levelsService.findById(id);
-    if (level === null) {
-      throw new NotFoundException('Level not found');
-    } else {
-      return level;
-    }
+  async getPassesById(@Param('id', new ParseIntPipe()) id: number) {
+    return await this.passesService.findById(id);
   }
 }

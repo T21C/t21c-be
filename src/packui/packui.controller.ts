@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UiPackDto } from 'dto/uipack.dto';
-import { UiPackSongDto } from 'dto/uipacksong.dto';
+import { UiPackDto } from 'dto/level/uipack.dto';
+import { UiPackSongDto } from 'dto/level/uipacksong.dto';
 import { LevelsService } from '../levels/levels.service';
 
 @ApiTags()
