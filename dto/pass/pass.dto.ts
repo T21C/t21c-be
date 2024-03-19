@@ -7,6 +7,9 @@ export class PassDto {
   @ApiProperty({ example: 1 })
   levelId: number;
 
+  @ApiProperty({ example: 1.0 })
+  speed: number;
+
   @ApiProperty({ example: 'BWen' })
   player: string;
 

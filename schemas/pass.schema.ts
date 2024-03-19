@@ -12,6 +12,9 @@ export class Pass {
   levelId: number;
 
   @Prop()
+  speed: number;
+
+  @Prop()
   player: string;
 
   @Prop()
