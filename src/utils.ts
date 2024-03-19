@@ -30,7 +30,13 @@ export async function parseGViz(
       rowData[headers[i]] = cell ? cell.v : '';
     });
     if (judgements) {
-      rowData['judgements'] = judgements.map((judgement) => row.c[judgement].v);
+      const judgementArray: number[] = [];
+      judgements.forEach((judgement) => {
+        const cell = row.c[judgement];
+        judgementArray.push(cell ? cell.v : '');
+      });
+
+      rowData['judgements'] = judgementArray;
     }
     return rowData;
   });
