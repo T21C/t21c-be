@@ -36,7 +36,7 @@ export class Level {
   pgunum_diff: number;
 
   @Prop()
-  pgn_diff: number;
+  pdn_diff: number;
 
   @Prop()
   vidLink: string;

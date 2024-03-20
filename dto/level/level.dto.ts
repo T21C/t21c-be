@@ -32,7 +32,7 @@ export class LevelDto {
   pgunum_diff: number;
 
   @ApiProperty({ example: 21.09 })
-  pgn_diff: number;
+  pdn_diff: number;
 
   @ApiProperty({ example: 21 })
   forum: number;
