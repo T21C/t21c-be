@@ -33,6 +33,9 @@ export class Level {
   pgu_diff: string;
 
   @Prop()
+  pgunum_diff: number;
+
+  @Prop()
   pgn_diff: number;
 
   @Prop()

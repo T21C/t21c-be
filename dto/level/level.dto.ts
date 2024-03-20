@@ -29,6 +29,9 @@ export class LevelDto {
   pgu_diff: string;
 
   @ApiProperty({ example: 21.09 })
+  pgunum_diff: number;
+
+  @ApiProperty({ example: 21.09 })
   pgn_diff: number;
 
   @ApiProperty({ example: 21 })
