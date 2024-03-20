@@ -33,6 +33,9 @@ export class Level {
   pgu_diff: string;
 
   @Prop()
+  pgn_diff: number;
+
+  @Prop()
   vidLink: string;
 
   @Prop()
