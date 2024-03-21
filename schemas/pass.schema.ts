@@ -27,6 +27,12 @@ export class Pass {
   vidUploadTime: string;
 
   @Prop()
+  is12K: boolean;
+
+  @Prop()
+  isNoHoldTap: boolean;
+
+  @Prop()
   judgements: number[];
 
   @Prop({ select: false })
