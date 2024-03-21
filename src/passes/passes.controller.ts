@@ -7,6 +7,7 @@ import {
   NotFoundException,
   Param,
   ParseIntPipe,
+  BadRequestException,
 } from '@nestjs/common';
 import {
   ApiExcludeEndpoint,
@@ -72,31 +73,22 @@ export class PassesController {
     description: 'Retrieves a list of all passes.',
   })
   @ApiTags('passes')
+  @ApiQuery({
+    name: 'levelId',
+    description: 'Level ID to search passes for',
+    required: false,
+  })
   @ApiResponse({
     status: 200,
     description: 'Success',
     type: [PassDto],
   })
-  async search() {
+  async search(@Query() query: any) {
+    if (query.levelId) {
+      if (isNaN(query.levelId))
+        return new BadRequestException('Invalid level ID');
+      return this.passesService.findById(query.levelId);
+    }
     return this.passesService.findAll();
-  }
-
-  @Get(':id')
-  @ApiOperation({
-    summary: 'Gets a level by ID',
-    description: 'Searches a level by its ID, and returns it.',
-  })
-  @ApiTags('levels')
-  @ApiResponse({
-    status: 200,
-    description: 'Success',
-    type: PassDto,
-  })
-  @ApiResponse({
-    status: 400,
-    description: 'Invalid ID',
-  })
-  async getPassesById(@Param('id', new ParseIntPipe()) id: number) {
-    return await this.passesService.findById(id);
   }
 }
