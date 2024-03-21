@@ -26,13 +26,13 @@ export class LevelDto {
   diff: number;
 
   @ApiProperty({ example: 'U1' })
-  pgu_diff: string;
+  pguDiff: string;
 
   @ApiProperty({ example: 21.09 })
-  pgunum_diff: number;
+  pguDiffNum: number;
 
   @ApiProperty({ example: 21.09 })
-  pdn_diff: number;
+  pdnDiff: number;
 
   @ApiProperty({ example: 21 })
   forum: number;

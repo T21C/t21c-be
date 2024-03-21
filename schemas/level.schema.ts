@@ -30,13 +30,13 @@ export class Level {
   diff: number;
 
   @Prop()
-  pgu_diff: string;
+  pguDiff: string;
 
   @Prop()
-  pgunum_diff: number;
+  pguDiffNum: number;
 
   @Prop()
-  pdn_diff: number;
+  pdnDiff: number;
 
   @Prop()
   vidLink: string;
