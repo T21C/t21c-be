@@ -34,8 +34,8 @@ export class LevelDto {
   @ApiProperty({ example: 21.09 })
   pdnDiff: number;
 
-  @ApiProperty({ example: 21 })
-  forum: number;
+  @ApiProperty({ example: 3000 })
+  baseScore: number;
 
   @ApiProperty({ example: 'https://youtu.be/tdig-B8QVKo' })
   vidLink: string;

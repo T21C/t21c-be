@@ -39,6 +39,9 @@ export class Level {
   pdnDiff: number;
 
   @Prop()
+  baseScore: number;
+
+  @Prop()
   vidLink: string;
 
   @Prop()
