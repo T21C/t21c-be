@@ -4,9 +4,6 @@ import {
   Get,
   Post,
   UnauthorizedException,
-  NotFoundException,
-  Param,
-  ParseIntPipe,
   BadRequestException,
 } from '@nestjs/common';
 import {
@@ -17,10 +14,6 @@ import {
   ApiSecurity,
   ApiTags,
 } from '@nestjs/swagger';
-import { Level } from 'schemas/level.schema';
-import { LevelDto } from 'dto/level/level.dto';
-import { LevelQueryDto } from 'dto/level/levelquery.dto';
-import { AppService } from '../app.service';
 import { GsheetsService } from '../gsheets/gsheets.service';
 import { PassesService } from './passes.service';
 import { TOKEN } from '../../config.json';
@@ -30,7 +23,6 @@ import { PassDto } from 'dto/pass/pass.dto';
 @Controller('passes')
 export class PassesController {
   constructor(
-    private readonly appService: AppService,
     private readonly gsheetsService: GsheetsService,
     private readonly passesService: PassesService,
   ) {}

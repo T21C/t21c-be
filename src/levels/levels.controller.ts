@@ -19,7 +19,6 @@ import {
 import { Level } from 'schemas/level.schema';
 import { LevelDto } from 'dto/level/level.dto';
 import { LevelQueryDto } from 'dto/level/levelquery.dto';
-import { AppService } from '../app.service';
 import { GsheetsService } from '../gsheets/gsheets.service';
 import { LevelsService } from '../levels/levels.service';
 import { TOKEN } from '../../config.json';
@@ -28,7 +27,6 @@ import { TOKEN } from '../../config.json';
 @Controller('levels')
 export class LevelsController {
   constructor(
-    private readonly appService: AppService,
     private readonly gsheetsService: GsheetsService,
     private readonly levelsService: LevelsService,
   ) {}
