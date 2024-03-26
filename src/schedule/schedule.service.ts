@@ -3,6 +3,7 @@ import { Cron, CronExpression } from '@nestjs/schedule';
 import { LevelsService } from '../levels/levels.service';
 import { GsheetsService } from 'src/gsheets/gsheets.service';
 import { PassesService } from 'src/passes/passes.service';
+import { PlayersService } from 'src/players/players.service';
 
 @Injectable()
 export class ScheduleService {
@@ -10,6 +11,7 @@ export class ScheduleService {
     private readonly gsheetsService: GsheetsService,
     private readonly levelsService: LevelsService,
     private readonly passesService: PassesService,
+    private readonly playersService: PlayersService,
   ) {}
   private readonly logger = new Logger(ScheduleService.name);
 
@@ -28,6 +30,14 @@ export class ScheduleService {
     try {
       await this.passesService.deletePasses();
       await this.passesService.insertPasses(passesResult);
+    } catch (e) {
+      return e;
+    }
+
+    const playersResult = await this.gsheetsService.getPlayersDataFromSheets();
+    try {
+      await this.playersService.deletePlayers();
+      await this.playersService.insertPlayers(playersResult);
     } catch (e) {
       return e;
     }
