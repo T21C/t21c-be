@@ -14,6 +14,9 @@ import { PackUiController } from './packui/packui.controller';
 import { PassesService } from './passes/passes.service';
 import { PassesController } from './passes/passes.controller';
 import { PassSchema } from 'schemas/pass.schema';
+import { PlayerSchema } from 'schemas/player.schema';
+import { PlayersController } from './players/players.controller';
+import { PlayersService } from './players/players.service';
 
 @Module({
   imports: [
@@ -23,12 +26,14 @@ import { PassSchema } from 'schemas/pass.schema';
     }),
     MongooseModule.forFeature([{ name: 'Level', schema: LevelSchema }]),
     MongooseModule.forFeature([{ name: 'Pass', schema: PassSchema }]),
+    MongooseModule.forFeature([{ name: 'Player', schema: PlayerSchema }]),
     ScheduleModule.forRoot(),
   ],
   controllers: [
     AppController,
     LevelsController,
     PassesController,
+    PlayersController,
     PackUiController,
   ],
   providers: [
@@ -36,6 +41,7 @@ import { PassSchema } from 'schemas/pass.schema';
     GsheetsService,
     LevelsService,
     PassesService,
+    PlayersService,
     ScheduleService,
   ],
 })
