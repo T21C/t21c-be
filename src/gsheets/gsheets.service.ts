@@ -60,4 +60,19 @@ export class GsheetsService {
 
     return result;
   }
+
+  async getPlayersDataFromSheets() {
+    const response: any = await axios.get(
+      'https://spreadsheets.google.com/spreadsheets/d/1eaA1gyZ-6OWFthHFcVTfLV62U_MbpP6PHc8udN24iCg/gviz/tq?sheet=players%20by%20dev',
+    );
+    const gvizStr: string = response.data;
+
+    const result = await parseGViz(
+      gvizStr,
+      [6, 7, 9],
+      ['player', 'country', 'isBanned'],
+    );
+
+    return result;
+  }
 }
