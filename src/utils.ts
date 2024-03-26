@@ -50,3 +50,7 @@ export function getRandomInt(min: number, max: number) {
   const randomInt: number = Math.random();
   return Math.floor(randomInt * (max - min + 1) + min);
 }
+
+export function escapeRegExp(string: string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}

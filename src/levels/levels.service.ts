@@ -7,6 +7,7 @@ import { getRandomInt } from '../utils';
 import { Level, LevelDocument } from 'schemas/level.schema';
 import { shuffle } from 'shuffle-seed';
 import { UiPackSongDto } from 'dto/level/uipacksong.dto';
+import { escapeRegExp } from 'src/utils';
 
 @Injectable()
 export class LevelsService {
@@ -37,7 +38,7 @@ export class LevelsService {
     const levelList = this.levelModel.find();
 
     if (query.query) {
-      const queryRegex = new RegExp(query.query, 'i');
+      const queryRegex = new RegExp(escapeRegExp(query.query), 'i');
       levelList.and([
         {
           $or: [
@@ -49,15 +50,15 @@ export class LevelsService {
       ]);
     }
     if (query.artistQuery) {
-      const queryRegex = new RegExp(query.artistQuery, 'i');
+      const queryRegex = new RegExp(escapeRegExp(query.artistQuery), 'i');
       levelList.and([{ artist: queryRegex }]);
     }
     if (query.songQuery) {
-      const queryRegex = new RegExp(query.songQuery, 'i');
+      const queryRegex = new RegExp(escapeRegExp(query.songQuery), 'i');
       levelList.and([{ song: queryRegex }]);
     }
     if (query.creatorQuery) {
-      const queryRegex = new RegExp(query.creatorQuery, 'i');
+      const queryRegex = new RegExp(escapeRegExp(query.creatorQuery), 'i');
       levelList.and([{ creator: queryRegex }]);
     }
 
