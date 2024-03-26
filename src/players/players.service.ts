@@ -35,7 +35,7 @@ export class PlayersService {
 
   async findByQuery(query: PlayerQueryDto): Promise<PlayerResponseDto> {
     const queryRegex = new RegExp(escapeRegExp(query.query), 'i');
-    const levelList = this.playerModel.find({ player: queryRegex });
+    const levelList = this.playerModel.find({ name: queryRegex });
 
     if ('offset' in query) {
       levelList.skip(query.offset);

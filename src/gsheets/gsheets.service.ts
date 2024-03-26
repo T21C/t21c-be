@@ -70,7 +70,7 @@ export class GsheetsService {
     const result = await parseGViz(
       gvizStr,
       [6, 7, 8],
-      ['player', 'country', 'isBanned'],
+      ['name', 'country', 'isBanned'],
     );
 
     return result;
