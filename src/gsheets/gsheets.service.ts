@@ -55,7 +55,7 @@ export class GsheetsService {
         'vidUploadTime',
         'is12K',
         'isNoHoldTap',
-        'islegacyPass',
+        'isLegacyPass',
       ],
       [8, 9, 10, 11, 12, 13, 14],
     );
