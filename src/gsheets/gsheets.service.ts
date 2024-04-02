@@ -84,7 +84,7 @@ export class GsheetsService {
         pass.accuracy * 100,
         pass.speed || 1,
         level.baseScore,
-        level.pguDiffNum === 64,
+        level.diff === 64,
         tileCount,
         pass.judgements[0],
         pass.isNoHoldTap,
