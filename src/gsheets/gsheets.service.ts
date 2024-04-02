@@ -81,7 +81,7 @@ export class GsheetsService {
         pass.judgements[5];
 
       pass.scoreV2 = calculatePP(
-        pass.accuracy,
+        pass.accuracy * 100,
         pass.speed,
         level.baseScore,
         level.pguDiffNum === 64,
