@@ -103,7 +103,6 @@ export function calculatePP(
   } else if (xacc == 100) {
     xaccMtp = 6;
   }
-  console.log(xaccMtp);
 
   //get speed multiplier
   if (isDesertBus) {
