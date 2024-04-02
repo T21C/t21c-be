@@ -70,7 +70,7 @@ export class GsheetsService {
       }
 
       const levelList = await this.levelsService.findAll();
-      const level = levelList.results[pass.id - 1];
+      const level = levelList.results[pass.levelId - 1];
       const tileCount =
         pass.judgements[1] +
         pass.judgements[2] +
@@ -82,7 +82,7 @@ export class GsheetsService {
         pass.accuracy,
         pass.speed,
         level.baseScore,
-        level.diff === 64,
+        level.pguDiffNum === 64,
         tileCount,
         pass.judgements[0],
         pass.isNoHoldTap,
