@@ -34,5 +34,6 @@ export class PassDto {
   @ApiProperty({ example: [6, 17, 46, 4910, 24, 15, 0] })
   judgements: number[];
 
+  @ApiProperty({ example: 0.9917297728178558 })
   accuracy: number;
 }
