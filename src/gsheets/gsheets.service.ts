@@ -82,7 +82,7 @@ export class GsheetsService {
 
       pass.scoreV2 = calculatePP(
         pass.accuracy * 100,
-        pass.speed,
+        pass.speed || 1,
         level.baseScore,
         level.pguDiffNum === 64,
         tileCount,
