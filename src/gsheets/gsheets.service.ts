@@ -1,10 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { parseGViz } from 'src/utils';
+import { calculatePP, calculateXAcc, parseGViz } from 'src/utils';
 import axios from 'axios';
 import { Pass } from 'schemas/pass.schema';
+import { LevelsService } from 'src/levels/levels.service';
 
 @Injectable()
 export class GsheetsService {
+  constructor(private readonly levelsService: LevelsService) {}
   async getLevelsDataFromSheets() {
     const response: any = await axios.get(
       'https://spreadsheets.google.com/spreadsheets/d/1eaA1gyZ-6OWFthHFcVTfLV62U_MbpP6PHc8udN24iCg/gviz/tq?sheet=levels%20by%20dev',
@@ -64,18 +66,27 @@ export class GsheetsService {
       if (pass.isLegacyPass)
         pass.accuracy = pass.judgements[0] === 1 ? 0.95 : 1;
       else {
-        const judgements = pass.judgements;
-        let total = 0;
-        let weights = 0;
-        for (let i = 0; i < judgements.length; i++) {
-          total += judgements[i];
-        }
-        weights += judgements[0] * 20;
-        weights += (judgements[1] + judgements[5]) * 40;
-        weights += (judgements[2] + judgements[4]) * 75;
-        weights += judgements[3] * 100;
-        pass.accuracy = weights / total / 100;
+        pass.accuracy = calculateXAcc(pass.judgements);
       }
+
+      const levelList = await this.levelsService.findAll();
+      const level = levelList.results[pass.id - 1];
+      const tileCount =
+        pass.judgements[1] +
+        pass.judgements[2] +
+        pass.judgements[3] +
+        pass.judgements[4] +
+        pass.judgements[5];
+
+      pass.scoreV2 = calculatePP(
+        pass.accuracy,
+        pass.speed,
+        level.baseScore,
+        level.diff === 64,
+        tileCount,
+        pass.judgements[0],
+        pass.isNoHoldTap,
+      );
     }
 
     return result;

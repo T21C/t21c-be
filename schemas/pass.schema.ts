@@ -41,6 +41,9 @@ export class Pass {
   @Prop()
   accuracy: number;
 
+  @Prop()
+  scoreV2: number;
+
   @Prop({ select: false })
   _id: string;
 
