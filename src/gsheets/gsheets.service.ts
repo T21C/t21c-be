@@ -71,7 +71,8 @@ export class GsheetsService {
         pass.accuracy = calculateXAcc(pass.judgements);
       }
 
-      const level = levelList.results[pass.levelId - 1];
+      const level = levelList.results.find((l) => l.id === pass.levelId);
+      if (!level) continue;
       const tileCount =
         pass.judgements[1] +
         pass.judgements[2] +
