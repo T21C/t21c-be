@@ -72,10 +72,10 @@ export class LevelsService {
         levelList.sort({ id: 'asc' });
       }
       if (query.sort === 'DIFF_DESC') {
-        levelList.sort({ diff: 'desc' });
+        levelList.sort({ pdnDiff: 'desc' });
       }
       if (query.sort === 'DIFF_ASC') {
-        levelList.sort({ diff: 'asc' });
+        levelList.sort({ pdnDiff: 'asc' });
       }
       if (query.sort === 'RANDOM') {
         random = true;
