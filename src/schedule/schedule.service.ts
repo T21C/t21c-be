@@ -23,6 +23,7 @@ export class ScheduleService {
       await this.levelsService.deleteLevels();
       await this.levelsService.insertLevels(levelsResult);
     } catch (e) {
+      this.logger.error(e);
       return e;
     }
 
@@ -31,6 +32,7 @@ export class ScheduleService {
       await this.passesService.deletePasses();
       await this.passesService.insertPasses(passesResult);
     } catch (e) {
+      this.logger.error(e);
       return e;
     }
 
@@ -39,6 +41,7 @@ export class ScheduleService {
       await this.playersService.deletePlayers();
       await this.playersService.insertPlayers(playersResult);
     } catch (e) {
+      this.logger.error(e);
       return e;
     }
   }
