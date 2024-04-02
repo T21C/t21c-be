@@ -78,8 +78,6 @@ export class GsheetsService {
       }
     }
 
-    console.log(result);
-
     return result;
   }
 
