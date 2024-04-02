@@ -62,6 +62,8 @@ export class GsheetsService {
       [8, 9, 10, 11, 12, 13, 14],
     );
 
+    const levelList = await this.levelsService.findAll();
+
     for (const pass of result) {
       if (pass.isLegacyPass)
         pass.accuracy = pass.judgements[0] === 1 ? 0.95 : 1;
@@ -69,7 +71,6 @@ export class GsheetsService {
         pass.accuracy = calculateXAcc(pass.judgements);
       }
 
-      const levelList = await this.levelsService.findAll();
       const level = levelList.results[pass.levelId - 1];
       const tileCount =
         pass.judgements[1] +
