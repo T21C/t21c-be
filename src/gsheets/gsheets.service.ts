@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { parseGViz } from 'src/utils';
 import axios from 'axios';
+import { Pass } from 'schemas/pass.schema';
 
 @Injectable()
 export class GsheetsService {
@@ -41,9 +42,9 @@ export class GsheetsService {
     );
     const gvizStr: string = response.data;
 
-    const result = await parseGViz(
+    const result: Pass[] = await parseGViz(
       gvizStr,
-      [0, 1, 2, 3, 5, 6, 7, 15, 16],
+      [0, 1, 2, 3, 5, 6, 7, 15, 16, 17],
       [
         'id',
         'levelId',
@@ -54,9 +55,30 @@ export class GsheetsService {
         'vidUploadTime',
         'is12K',
         'isNoHoldTap',
+        'islegacyPass',
       ],
       [8, 9, 10, 11, 12, 13, 14],
     );
+
+    for (const pass of result) {
+      if (pass.isLegacyPass)
+        pass.accuracy = pass.judgements[0] === 1 ? 0.95 : 1;
+      else {
+        const judgements = pass.judgements;
+        let total = 0;
+        let weights = 0;
+        for (let i = 0; i < judgements.length; i++) {
+          total += judgements[i];
+        }
+        weights += judgements[0] * 20;
+        weights += (judgements[1] + judgements[5]) * 40;
+        weights += (judgements[2] + judgements[4]) * 75;
+        weights += judgements[3] * 100;
+        pass.accuracy = weights / total / 100;
+      }
+    }
+
+    console.log(result);
 
     return result;
   }

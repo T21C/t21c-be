@@ -28,6 +28,11 @@ export class PassDto {
   @ApiProperty({ example: false })
   isNoHoldTap: boolean;
 
+  @ApiProperty({ example: false })
+  isLegacyPass: boolean;
+
   @ApiProperty({ example: [6, 17, 46, 4910, 24, 15, 0] })
   judgements: number[];
+
+  accuracy: number;
 }

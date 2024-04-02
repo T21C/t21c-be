@@ -33,7 +33,13 @@ export class Pass {
   isNoHoldTap: boolean;
 
   @Prop()
+  isLegacyPass: boolean;
+
+  @Prop()
   judgements: number[];
+
+  @Prop()
+  accuracy: number;
 
   @Prop({ select: false })
   _id: string;
