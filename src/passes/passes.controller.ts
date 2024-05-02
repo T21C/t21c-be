@@ -76,10 +76,10 @@ export class PassesController {
     type: [PassDto],
   })
   async search(@Query() query: any) {
-    if (query.levelId) {
-      if (isNaN(query.levelId))
+    if (Object.keys(query).length > 0) {
+      if (!!query.levelId && isNaN(query.levelId))
         return new BadRequestException('Invalid level ID');
-      return this.passesService.findById(query.levelId);
+      return this.passesService.findByQuery(query);
     }
     return this.passesService.findAll();
   }
