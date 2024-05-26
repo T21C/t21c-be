@@ -35,11 +35,11 @@ export class PassesService {
   async findByQuery(query: PassQueryDto): Promise<PassResponseDto | null> {
     const passList = this.passModel.find();
 
-    if (query.id) {
+    if (query.levelId) {
       passList.and([{ levelId: query.levelId }]);
     }
     if (query.player) {
-      const queryRegex = new RegExp(escapeRegExp(query.creatorQuery), 'i');
+      const queryRegex = new RegExp(escapeRegExp(query.player), 'i');
       passList.and([{ player: queryRegex }]);
     }
 
