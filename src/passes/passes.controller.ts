@@ -70,6 +70,11 @@ export class PassesController {
     description: 'Level ID to search passes for',
     required: false,
   })
+  @ApiQuery({
+    name: 'player',
+    description: 'Player name to search passes for',
+    required: false,
+  })
   @ApiResponse({
     status: 200,
     description: 'Success',
