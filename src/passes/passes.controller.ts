@@ -18,6 +18,7 @@ import { GsheetsService } from '../gsheets/gsheets.service';
 import { PassesService } from './passes.service';
 import { TOKEN } from '../../config.json';
 import { PassDto } from 'dto/pass/pass.dto';
+import { PassQueryDto } from 'dto/pass/passquery.dto';
 
 @ApiTags()
 @Controller('passes')
@@ -80,9 +81,9 @@ export class PassesController {
     description: 'Success',
     type: [PassDto],
   })
-  async search(@Query() query: any) {
+  async search(@Query() query: PassQueryDto) {
     if (Object.keys(query).length > 0) {
-      if (!!query.levelId && isNaN(query.levelId))
+      if (!!query.levelId && isNaN(+query.levelId))
         return new BadRequestException('Invalid level ID');
       return this.passesService.findByQuery(query);
     }
