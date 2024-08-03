@@ -43,8 +43,40 @@ export class PassesService {
       passList.and([{ player: queryRegex }]);
     }
 
+    let sortOther = false;
+
+    if (query.sort) {
+      switch (query.sort) {
+        case 'SCORE_ASC':
+          passList.sort({ scoreV2: 'asc' });
+          break;
+        case 'SCORE_DESC':
+          passList.sort({ scoreV2: 'desc' });
+          break;
+        case 'XACC_ASC':
+          passList.sort({ accuracy: 'asc' });
+          break;
+        case 'XACC_DESC':
+          passList.sort({ accuracy: 'desc' });
+          break;
+        default:
+          sortOther = true;
+      }
+    }
+
     const results = await passList.exec();
     const count = await this.passModel.countDocuments(passList.getQuery());
+
+    if (sortOther) {
+      switch (query.sort) {
+        case 'DATE_ASC':
+          results.sort((a, b) => Date.parse(a.vidUploadTime) - Date.parse(b.vidUploadTime));
+          break;
+        case 'DATE_DESC':
+          results.sort((a, b) => Date.parse(b.vidUploadTime) - Date.parse(a.vidUploadTime));
+          break;
+      }
+    }
 
     const returnObject = {
       count,
