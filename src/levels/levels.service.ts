@@ -62,6 +62,16 @@ export class LevelsService {
       levelList.and([{ creator: queryRegex }]);
     }
 
+    if (query.hideCensored) {
+      levelList.nor([{ diff: -2 }]);
+    }
+    if (query.hideEpic) {
+      levelList.nor([{ diff: 0.9 }]);
+    }
+    if (query.hideUnranked) {
+      levelList.nor([{ diff: 0 }])
+    }
+
     let random = false;
 
     if (query.sort) {

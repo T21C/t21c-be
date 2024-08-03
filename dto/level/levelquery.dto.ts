@@ -13,6 +13,15 @@ export class LevelQueryDto {
   @ApiPropertyOptional({ example: 'Zagon' })
   creatorQuery: string;
 
+  @ApiPropertyOptional({ example: true })
+  hideUnranked: boolean;
+
+  @ApiPropertyOptional({ example: true })
+  hideCensored: boolean;
+
+  @ApiPropertyOptional({ example: true })
+  hideEpic: boolean;
+
   @ApiPropertyOptional({ example: 10 })
   offset: number;
 
