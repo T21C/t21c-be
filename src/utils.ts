@@ -93,84 +93,69 @@ export function calculatePP(
 
   //get xacc multiplier
   if (xacc < 95) {
-    xaccMtp = 1;
-  } else if (xacc < 99) {
-    xaccMtp = (xacc - 94) ** 1.6 / 12.1326 + 0.9176;
-  } else if (xacc < 99.8) {
-    xaccMtp = (xacc - 97) ** 1.5484 - 0.9249;
+      xaccMtp = 1;
   } else if (xacc < 100) {
-    xaccMtp = (xacc - 99) * 5;
-  } else if (xacc == 100) {
-    xaccMtp = 6;
+      xaccMtp = ((-0.027 / (xacc / 100 - 1.0054) + 0.513));
+  } else if (xacc === 100) {
+      xaccMtp = 10;
   }
 
   //get speed multiplier
   if (isDesertBus) {
-    if (speed == 1) {
-      speedMtp = 1;
-    } else if (speed > 1) {
-      speedMtp = 2 - speed;
-    }
+      if (speed == 1) {
+          speedMtp = 1;
+      } else if (speed > 1) {
+          speedMtp = 2 - speed;
+      }
   } else {
-    if (speed == 1) {
-      speedMtp = 1;
-    } else if (speed < 1) {
-      speedMtp = 0;
-    } else if (speed < 1.1) {
-      speedMtp = 25 * (speed - 1.1) ** 2 + 0.75;
-    } else if (speed < 1.2) {
-      speedMtp = 0.75;
-    } else if (speed < 1.25) {
-      speedMtp = 50 * (speed - 1.2) ** 2 + 0.75;
-    } else if (speed < 1.3) {
-      speedMtp = -50 * (speed - 1.3) ** 2 + 1;
-    } else if (speed < 1.5) {
-      speedMtp = 1;
-    } else if (speed < 1.75) {
-      speedMtp = 2 * (speed - 1.5) ** 2 + 1;
-    } else if (speed < 2) {
-      speedMtp = -2 * (speed - 2) ** 2 + 1.25;
-    } else {
-      speedMtp = 0;
-    }
+      if (speed < 1) {
+          speedMtp = 0;
+      } else if (speed < 1.1) {
+          speedMtp = -3.5 * speed + 4.5;
+      } else if (speed < 1.5) {
+          speedMtp = 0.65;
+      } else if (speed < 2) {
+          speedMtp = (0.7 * speed) - 0.4;
+      } else {
+          speedMtp = 1;
+      }
   }
 
   //get scorev2 multiplier
   if (misses == 0) {
-    scorev2Mtp = 1.1;
-  } else {
-    let tp = (start + end) / 2;
-    let tpDeduc = (startDeduc + endDeduc) / 2;
-    let am = Math.max(0, misses - Math.floor(tileCount / gmConst));
-
-    if (am <= 0) {
-      scorev2Mtp = 1;
-    } else if (am <= start) {
-      scorev2Mtp = 1 - startDeduc / 100;
-    } else if (am <= tp) {
-      let kOne =
-        (Math.pow((am - start) / (tp - start), pwr) * (tpDeduc - startDeduc)) /
-        100;
-      scorev2Mtp = 1 - startDeduc / 100 - kOne;
-    } else if (am <= end) {
-      const kTwo =
-        (Math.pow((end - am) / (end - tp), pwr) * (endDeduc - tpDeduc)) / 100;
-      scorev2Mtp = 1 + kTwo - endDeduc / 100;
-    } else {
-      scorev2Mtp = 1 - endDeduc / 100;
-    }
+      scorev2Mtp = 1.1;
   }
+  else {
+      let tp = (start + end) / 2;
+      let tpDeduc = (startDeduc + endDeduc) / 2;
+      let am = Math.max(0, misses - Math.floor(tileCount / gmConst));
+
+      if (am <= 0) {
+          scorev2Mtp = 1;
+      } else if (am <= start) {
+          scorev2Mtp = 1 - startDeduc / 100;
+      } else if (am <= tp) {
+          let kOne = (Math.pow((am - start) / (tp - start), pwr) * (tpDeduc - startDeduc)) / 100;
+          scorev2Mtp = 1 - startDeduc / 100 - kOne;
+      } else if (am <= end) {
+          const kTwo = (Math.pow((end - am) / (end - tp), pwr) * (endDeduc - tpDeduc)) / 100;
+          scorev2Mtp = 1 + kTwo - endDeduc / 100;
+      } else {
+          scorev2Mtp = 1 - endDeduc / 100;
+      }
+  }
+
 
   //get score
   if (isDesertBus) {
-    score = Math.max(1, baseScore * xaccMtp * speedMtp);
+      score = Math.max(1, baseScore * xaccMtp * speedMtp);
   } else {
-    score = baseScore * xaccMtp * speedMtp;
+      score = baseScore * xaccMtp * speedMtp;
   }
 
   //get scorev2
   if (isNoHoldTap) {
-    scorev2Mtp *= 0.9;
+      scorev2Mtp *= 0.9;
   }
   scorev2 = score * scorev2Mtp;
 

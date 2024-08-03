@@ -9,4 +9,13 @@ export class PlayerDto {
 
   @ApiProperty({ example: false })
   isBanned: boolean;
+
+  rankedScore?: number;
+  generalScore?: number;
+  averageXacc?: number;
+  totalPasses?: number;
+  universalPasses?: number;
+  wfPasses?: number;
+  bestDiff?: string;
+  best12KDiff?: string;
 }

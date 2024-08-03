@@ -73,7 +73,7 @@ export class PlayersController {
   })
   async search(@Query() query: PlayerQueryDto) {
     if (Object.keys(query).length > 0) {
-      return this.playersService.findByQuery(query);
+      return this.playersService.findByQuery(query); 
     } else {
       return this.playersService.findAll();
     }
