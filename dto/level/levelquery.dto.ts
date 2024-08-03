@@ -22,6 +22,12 @@ export class LevelQueryDto {
   @ApiPropertyOptional({ example: true })
   hideEpic: boolean;
 
+  @ApiPropertyOptional({ description: 'The minimum difficulty to display, in PGU number difficulty' })
+  minDiff: number;
+
+  @ApiPropertyOptional({ description: 'The maximum difficulty to display, in PGU number difficulty' })
+  maxDiff: number;
+
   @ApiPropertyOptional({ example: 10 })
   offset: number;
 

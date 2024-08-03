@@ -69,7 +69,14 @@ export class LevelsService {
       levelList.nor([{ diff: 0.9 }]);
     }
     if (query.hideUnranked) {
-      levelList.nor([{ diff: 0 }])
+      levelList.nor([{ diff: 0 }]);
+    }
+
+    if (query.minDiff) {
+      levelList.and([{ pguDiffNum: { $gte: query.minDiff } }]);
+    }
+    if (query.maxDiff) {
+      levelList.and([{ pguDiffNum: { $lte: query.maxDiff } }]);
     }
 
     let random = false;
