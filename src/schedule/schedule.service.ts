@@ -15,7 +15,7 @@ export class ScheduleService {
   ) {}
   private readonly logger = new Logger(ScheduleService.name);
 
-  // @Cron(CronExpression.EVERY_5_MINUTES)
+  @Cron('0 */15 * * * *')
   async refreshDb() {
     this.logger.log('wow refreshing');
     const levelsResult = await this.gsheetsService.getLevelsDataFromSheets();
