@@ -13,6 +13,9 @@ export class PassDto {
   @ApiProperty({ example: 'BWen' })
   player: string;
 
+  @ApiProperty()
+  feelingRating: string;
+
   @ApiProperty({ example: '최고의 플레이를 감상해주세요' })
   vidTitle: string;
 

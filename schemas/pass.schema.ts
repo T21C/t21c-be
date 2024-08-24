@@ -18,6 +18,9 @@ export class Pass {
   player: string;
 
   @Prop()
+  feelingRating: string;
+
+  @Prop()
   vidTitle: string;
 
   @Prop()
