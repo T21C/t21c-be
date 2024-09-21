@@ -30,16 +30,31 @@ export class Level {
   diff: number;
 
   @Prop()
+  legacyDiff: number;
+
+  @Prop()
   pguDiff: string;
 
   @Prop()
   pguDiffNum: number;
 
   @Prop()
+  newDiff: number;
+
+  @Prop()
   pdnDiff: number;
 
   @Prop()
+  realDiff: number;
+
+  @Prop()
   baseScore: number;
+
+  @Prop()
+  isCleared: boolean;
+
+  @Prop()
+  clears: number;
 
   @Prop()
   vidLink: string;
@@ -49,6 +64,9 @@ export class Level {
 
   @Prop()
   workshopLink: string;
+
+  @Prop()
+  publicComments: string;
 
   @Prop({ select: false })
   _id: string;

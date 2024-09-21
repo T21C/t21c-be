@@ -25,17 +25,32 @@ export class LevelDto {
   @ApiProperty({ example: 21.05 })
   diff: number;
 
+  @ApiProperty({ example: 21.05 })
+  legacyDiff: number;
+
   @ApiProperty({ example: 'U1' })
   pguDiff: string;
 
   @ApiProperty({ example: 21.09 })
   pguDiffNum: number;
 
+  @ApiProperty({ example: 41 })
+  newDiff: number;
+
   @ApiProperty({ example: 21.09 })
   pdnDiff: number;
 
+  @ApiProperty({ example: 21.09 })
+  realDiff: number;
+
   @ApiProperty({ example: 3000 })
   baseScore: number;
+
+  @ApiProperty({ example: true })
+  isCleared: boolean;
+
+  @ApiProperty({ example: 4 })
+  clears: number;
 
   @ApiProperty({ example: 'https://youtu.be/tdig-B8QVKo' })
   vidLink: string;
@@ -51,4 +66,7 @@ export class LevelDto {
       'https://steamcommunity.com/sharedfiles/filedetails/?id=2556624480',
   })
   workshopLink: string;
+
+  @ApiProperty({ example: 'random string' })
+  publicComments: string;
 }
