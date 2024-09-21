@@ -4,6 +4,7 @@ import {
   Get,
   Post,
   UnauthorizedException,
+  Logger,
 } from '@nestjs/common';
 import {
   ApiExcludeEndpoint,
@@ -26,6 +27,7 @@ export class PlayersController {
     private readonly gsheetsService: GsheetsService,
     private readonly playersService: PlayersService,
   ) {}
+  private readonly logger = new Logger(PlayersService.name);
 
   @ApiExcludeEndpoint()
   @Post('refresh')
@@ -46,12 +48,14 @@ export class PlayersController {
     if (query.token !== TOKEN) {
       throw new UnauthorizedException('Invalid token');
     }
+    this.logger.log('Refreshing players...');
 
     const result = await this.gsheetsService.getPlayersDataFromSheets();
     try {
       await this.playersService.deletePlayers();
       await this.playersService.insertPlayers(result);
 
+      this.logger.log('players refresh done');
       return 'Refresh done';
     } catch (e) {
       return e;

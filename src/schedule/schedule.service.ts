@@ -18,6 +18,7 @@ export class ScheduleService {
   @Cron('0 */15 * * * *')
   async refreshDb() {
     this.logger.log('wow refreshing');
+    this.logger.log('Refreshing levels...');
     const levelsResult = await this.gsheetsService.getLevelsDataFromSheets();
     try {
       await this.levelsService.deleteLevels();
@@ -27,6 +28,7 @@ export class ScheduleService {
       return e;
     }
 
+    this.logger.log('Refreshing passes...');
     const passesResult = await this.gsheetsService.getPassesDataFromSheets();
     try {
       await this.passesService.deletePasses();
@@ -36,6 +38,7 @@ export class ScheduleService {
       return e;
     }
 
+    this.logger.log('Refreshing players...');
     const playersResult = await this.gsheetsService.getPlayersDataFromSheets();
     try {
       await this.playersService.deletePlayers();
@@ -44,5 +47,7 @@ export class ScheduleService {
       this.logger.error(e);
       return e;
     }
+
+    this.logger.log('Refresh done.');
   }
 }

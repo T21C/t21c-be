@@ -7,6 +7,7 @@ import {
   NotFoundException,
   Param,
   ParseIntPipe,
+  Logger,
 } from '@nestjs/common';
 import {
   ApiExcludeEndpoint,
@@ -30,6 +31,7 @@ export class LevelsController {
     private readonly gsheetsService: GsheetsService,
     private readonly levelsService: LevelsService,
   ) {}
+  private readonly logger = new Logger(LevelsService.name);
 
   @ApiExcludeEndpoint()
   @Post('refresh')
@@ -51,11 +53,13 @@ export class LevelsController {
       throw new UnauthorizedException('Invalid token');
     }
 
+    this.logger.log('Refreshing levels...');
     const result = await this.gsheetsService.getLevelsDataFromSheets();
     try {
       await this.levelsService.deleteLevels();
       await this.levelsService.insertLevels(result);
 
+      this.logger.log('levels refresh done');
       return 'Refresh done';
     } catch (e) {
       return e;

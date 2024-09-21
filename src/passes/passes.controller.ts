@@ -5,6 +5,7 @@ import {
   Post,
   UnauthorizedException,
   BadRequestException,
+  Logger,
 } from '@nestjs/common';
 import {
   ApiExcludeEndpoint,
@@ -27,6 +28,7 @@ export class PassesController {
     private readonly gsheetsService: GsheetsService,
     private readonly passesService: PassesService,
   ) {}
+  private readonly logger = new Logger(PassesService.name);
 
   @ApiExcludeEndpoint()
   @Post('refresh')
@@ -49,11 +51,14 @@ export class PassesController {
       throw new UnauthorizedException('Invalid token');
     }
 
+    this.logger.log('Refreshing passes...');
+
     const result = await this.gsheetsService.getPassesDataFromSheets();
     try {
       await this.passesService.deletePasses();
       await this.passesService.insertPasses(result);
 
+      this.logger.log('pass refresh done');
       return 'Refresh done';
     } catch (e) {
       return e;
